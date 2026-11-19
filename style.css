@@ -1,0 +1,172 @@
+
+/* Main page */
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #f8f7f3;
+    color: #242424;
+    text-align: center;
+    min-height: 100vh;
+    margin: 0;
+    padding: 70px 20px;
+    box-sizing: border-box;
+}
+
+/* Title */
+h1 {
+    font-size: clamp(30px, 5vw, 52px);
+    font-weight: 600;
+    letter-spacing: -2px;
+    margin-bottom: 12px;
+}
+
+body > p {
+    color: #77736d;
+    font-size: 15px;
+}
+
+/* Rock, Paper, Scissors buttons */
+#rock, #paper, #scissors {
+    width: 150px;
+    min-height: 165px;
+    margin: 12px 8px;
+    padding: 24px 12px;
+    background-color: white;
+    border: 1px solid #e4e0d9;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: #333;
+    transition: transform 0.2s ease,
+                box-shadow 0.2s ease,
+                border-color 0.2s ease;
+}
+
+/* Hand illustrations */
+#rock::before,
+#paper::before,
+#scissors::before {
+    display: block;
+    font-size: 65px;
+    line-height: 1.5;
+    margin-bottom: 8px;
+}
+
+#rock::before {
+    content: "✊";
+}
+
+#paper::before {
+    content: "✋";
+}
+
+#scissors::before {
+    content: "✌";
+}
+
+/* Button hover effect */
+#rock:hover:not(:disabled),
+#paper:hover:not(:disabled),
+#scissors:hover:not(:disabled) {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.08);
+    border-color: #999;
+}
+
+button:focus-visible {
+    outline: 3px solid #77736d;
+    outline-offset: 3px;
+}
+
+/* Disabled buttons */
+button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* Scoreboard */
+#score {
+    display: flex;
+    justify-content: center;
+    gap: 65px;
+    margin: 35px auto;
+}
+
+#score p {
+    font-size: 16px;
+    color: #555;
+}
+
+#human-score,
+#computer-score {
+    display: block;
+    font-size: 38px;
+    font-weight: 700;
+    color: #242424;
+    margin-top: 12px;
+}
+
+/* Round choices and results */
+#choices {
+    font-size: 15px;
+    color: #77736d;
+    margin-top: 25px;
+}
+
+#results {
+    font-size: 22px;
+    font-weight: 600;
+    margin: 20px auto;
+}
+
+#game-over {
+    font-size: 20px;
+    font-weight: 600;
+    margin-top: 25px;
+}
+
+/* Play Again button */
+#play-again {
+    background-color: #242424;
+    color: white;
+    border: none;
+    padding: 15px 35px;
+    border-radius: 30px;
+    font-size: 15px;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+#play-again:hover {
+    background-color: #555;
+}
+
+#play-again[hidden] {
+    display: none;
+}
+
+/* Smaller screens */
+@media (max-width: 600px) {
+    body {
+        padding: 40px 12px;
+    }
+
+    #rock, #paper, #scissors {
+        width: 30%;
+        min-height: 130px;
+        margin: 5px 1%;
+        padding: 12px 5px;
+        font-size: 11px;
+    }
+
+    #rock::before,
+    #paper::before,
+    #scissors::before {
+        font-size: 42px;
+    }
+
+    #score {
+        gap: 35px;
+    }
+}

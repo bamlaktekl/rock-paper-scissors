@@ -1,10 +1,11 @@
+
 console.log("Hello World!");
 
-// Track scores
+// Keep track of scores
 let humanScore = 0;
 let computerScore = 0;
 
-// Random computer choice
+// Randomly choose rock, paper, or scissors
 function getComputerChoice() {
     const randomNumber = Math.floor(Math.random() * 3);
 
@@ -17,48 +18,62 @@ function getComputerChoice() {
     }
 }
 
+// Capitalize the first letter of a choice
+function capitalize(word) {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+}
+
 // Play one round
 function playRound(humanChoice, computerChoice) {
-    // Don't allow more rounds after someone reaches 5
+
+    // Stop the game once someone reaches 5 points
     if (humanScore >= 5 || computerScore >= 5) {
         return;
     }
 
     humanChoice = humanChoice.toLowerCase();
 
-    // Display both choices
+    let message = "";
+
+    // Show both players' choices in smaller text
     choices.textContent =
         "You chose " + humanChoice +
         ". Computer chose " + computerChoice + ".";
 
-    // Determine the round winner
+    // Determine the winner
     if (humanChoice === computerChoice) {
-        console.log("It's a tie!");
-        results.textContent = "It's a tie!";
+
+        message = "Both chose " + humanChoice + ". It's a tie!";
 
     } else if (
         (humanChoice === "rock" && computerChoice === "scissors") ||
         (humanChoice === "paper" && computerChoice === "rock") ||
         (humanChoice === "scissors" && computerChoice === "paper")
     ) {
+
         humanScore++;
-        console.log("You win! " + humanChoice + " beats " + computerChoice);
-        results.textContent =
-            "You win! " + humanChoice + " beats " + computerChoice;
+
+        message = capitalize(humanChoice) + " beats " +
+            computerChoice + ". You win!";
 
     } else {
+
         computerScore++;
-        console.log("You lose! " + computerChoice + " beats " + humanChoice);
-        results.textContent =
-            "You lose! " + computerChoice + " beats " + humanChoice;
+
+        message = capitalize(computerChoice) + " beats " +
+            humanChoice + ". You lose!";
     }
 
-    // Update scoreboard
+    // Display the bold result
+    results.textContent = message;
+
+    // Update the scoreboard
     humanScoreDisplay.textContent = humanScore;
     computerScoreDisplay.textContent = computerScore;
 
-    // Check for game over
+    // Check if the game is over
     if (humanScore >= 5 || computerScore >= 5) {
+
         if (humanScore >= 5) {
             gameOver.textContent =
                 "You won the game! Final score: " +
@@ -69,17 +84,17 @@ function playRound(humanChoice, computerChoice) {
                 humanScore + " - " + computerScore;
         }
 
-        // Disable buttons
+        // Disable choice buttons
         rock.disabled = true;
         paper.disabled = true;
         scissors.disabled = true;
 
-        // Show restart button
+        // Show Play Again button
         playAgain.hidden = false;
     }
 }
 
-// Find HTML elements
+// Select HTML elements
 const rock = document.querySelector("#rock");
 const paper = document.querySelector("#paper");
 const scissors = document.querySelector("#scissors");
@@ -93,21 +108,24 @@ const computerScoreDisplay = document.querySelector("#computer-score");
 
 const playAgain = document.querySelector("#play-again");
 
-// Button event listeners
+// Rock button
 rock.addEventListener("click", () => {
     playRound("rock", getComputerChoice());
 });
 
+// Paper button
 paper.addEventListener("click", () => {
     playRound("paper", getComputerChoice());
 });
 
+// Scissors button
 scissors.addEventListener("click", () => {
     playRound("scissors", getComputerChoice());
 });
 
 // Restart the game
 playAgain.addEventListener("click", () => {
+
     humanScore = 0;
     computerScore = 0;
 
@@ -124,3 +142,7 @@ playAgain.addEventListener("click", () => {
 
     playAgain.hidden = true;
 });
+
+// Display initial scores
+humanScoreDisplay.textContent = humanScore;
+computerScoreDisplay.textContent = computerScore;
